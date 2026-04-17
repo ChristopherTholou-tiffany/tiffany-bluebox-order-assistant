@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tiffany BlueBox Order Assistant</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      font-family: Arial, sans-serif;
+    }
+
+    .widget {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: #7fdad0;
+      color: #003b3b;
+      text-align: center;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 16px 12px;
+    }
+
+    .messages {
+      height: 140px;
+      padding: 14px;
+      font-size: 14px;
+      overflow-y: auto;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .msg {
+      margin-bottom: 8px;
+    }
+
+    .user {
+      text-align: right;
+      color: #003b3b;
+    }
+
+    .bot {
+      text-align: left;
+      color: #005f5f;
+      font-style: italic;
+    }
+
+    .input-bar {
+      display: flex;
+    }
+
+    .input-bar input {
+      flex: 1;
+      border: none;
+      padding: 14px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .input-bar button {
+      background: #7fdad0;
+      color: #003b3b;
+      border: none;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .input-bar button:hover {
+      background: #6acfc5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="widget">
+    <div class="header">
+      Tiffany BlueBox Order Assistant
+    </div>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="input-bar">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Hi! I am your Tiffany Order Assistant. Ask me anything about orders"
+        onkeydown="if(event.key==='Enter') sendMessage()"
+      />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const messages = document.getElementById("messages");
+
+      messages.innerHTML += `<div class="msg user">${msg}</div>`;
+      messages.innerHTML += `<div class="msg bot">
+        I'm currently not equipped with LLMs to help you
+      </div>`;
+
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
